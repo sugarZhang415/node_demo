@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <div><router-link to="/">主页</router-link></div>
+    vue基础
     <div><router-link to="/events">事件</router-link></div>
     <div><router-link to="/form">表单</router-link></div>
-    <div><router-link to="/component-demo">组件传参</router-link></div>
+    <div><router-link to="/component-demo">组件传参(父子&兄弟)</router-link></div>
+    vue高级特性
+    <div><router-link to="/advance-use">自定义组件</router-link></div>
+    <div><router-link to="/nextTick">$nextTick</router-link></div>
     <router-view></router-view>
   </div>
 </template>
