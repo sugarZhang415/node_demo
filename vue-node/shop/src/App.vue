@@ -7,6 +7,12 @@
     vue高级特性
     <div><router-link to="/advance-use">自定义组件</router-link></div>
     <div><router-link to="/nextTick">$nextTick</router-link></div>
+    <div><router-link to="/slot">slot</router-link></div>
+    <div><router-link to="/scoped-slot">scoped_slot</router-link></div>
+    <div><router-link to="/dongtai">动态组件</router-link></div>
+    <div><router-link to="/yibu">异步组件</router-link></div>
+    <div><router-link to="/keep-alive">keep-alive缓存</router-link></div>
+    <div><router-link to="/mixin">mixin</router-link></div>
     <router-view></router-view>
   </div>
 </template>
