@@ -1,10 +1,9 @@
 # node_demo
 
-vue-node项目
+vue-base项目
   vue2的基础知识使用
 
   ##shop是前端项目，用的vue技术。通过yarn serve运行。
-  ####使用vant组件库。官网：https://vant-contrib.gitee.io/vant/#/zh-CN/quickstart。
 
   
 
@@ -18,4 +17,7 @@ vue3-demo
   关于vue3的小demo
 
 demo
-  网课系统复习vue的代码
+  网课系统复习vue的代码(慕课网代码)
+
+vuex-demo
+  vuex的demo(慕课网的代码)
