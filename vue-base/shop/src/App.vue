@@ -1,37 +1,70 @@
 <template>
-  <div id="app">
-    vue基础
-    <div><router-link to="/base/events">事件</router-link></div>
-    <div><router-link to="/base/form">表单</router-link></div>
-    <div><router-link to="/base/component-demo">组件传参(父子&兄弟)</router-link></div>
-    vue高级特性
-    <div><router-link to="/base/advance-use">自定义组件</router-link></div>
-    <div><router-link to="/base/nextTick">$nextTick</router-link></div>
-    <div><router-link to="/base/slot">slot</router-link></div>
-    <div><router-link to="/base/scoped-slot">scoped_slot</router-link></div>
-    <div><router-link to="/base/dongtai">动态组件</router-link></div>
-    <div><router-link to="/base/yibu">异步组件</router-link></div>
-    <div><router-link to="/base/keep-alive">keep-alive缓存</router-link></div>
-    <div><router-link to="/base/mixin">mixin</router-link></div>
-    <div><router-link to="/vuex">Vuex</router-link></div>
-    <hr>
+  <el-row class="tac">
+    <el-col :span="12">
+      <el-menu
+        :default-active="this.$route.path"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+      >
+        <template v-for="navMenu in NavList">
+          <el-menu-item
+            v-if="!navMenu.children"
+            :key="navMenu.path"
+            @click="goTo('/vuex')"
+            :index="navMenu.path"
+          >
+            <span slot="title">{{navMenu.title}}</span>
+          </el-menu-item>
+          <el-submenu
+            v-if="navMenu.children"
+            :key="navMenu.path"
+            @click="goTo(navMenu.path)"
+            :index="navMenu.path"
+          >
+            <template slot="title">
+              <span slot="title">{{navMenu.title}}</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item
+                @click="goTo(`${navMenu.path}/${item.path}`)"
+                v-for="item in navMenu.children"
+                :key="item.path"
+                :index="navMenu.path+'/'+item.path" 
+              >{{item.title}}</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+        </template>
+      </el-menu>
+    </el-col>
     <router-view></router-view>
-  </div>
+  </el-row>
 </template>
 
 <script>
-
+import { routes } from "./router.js";
 export default {
-  name: 'App'
-}
+  data() {
+    return {
+      NavList: routes
+    };
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    goTo(path) {
+      this.$router.replace(path);
+    }
+  }
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin: 20px;
+<style scoped>
+.el-col-12 {
+  width: 27%;
 }
 </style>

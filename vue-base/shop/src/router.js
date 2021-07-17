@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-  
+
 //组件模块
 import HelloWorld from './components/HelloWorld.vue'
 import Events from './pages/events/index.vue'
@@ -16,30 +16,44 @@ import KeepAlive from './pages/keep_alive/index.vue'
 import Mixin from './pages/mixin/index.vue'
 import Vuex from './pages/vuex/index.vue'
 Vue.use(Router)
- 
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
+export const routes = [
+  {
+    path: '/base',
+    component: HelloWorld,
+    title: 'vue基础',
+    children: [
+      { path: 'events', name: 'Events', title: '事件', component: Events },
+      { path: 'form', name: 'Form', title: '表单', component: Form },
+      { path: 'component-demo', name: 'ComponentDemo', title: '组件', component: ComponentDemo },
+      { path: 'advance-use', name: 'AdvanceUse', title: '自定义组件', component: AdvanceUse },
+      { path: 'nextTick', name: 'NextTick', title: 'nextTick', component: NextTick },
+      { path: 'slot', name: 'Slot', title: '插槽', component: Slot },
+      { path: 'scoped-slot', name: 'ScopedSlot', title: '作用于插槽', component: ScopedSlot },
+    ]
+  }, {
+    path: '/better',
+    component: HelloWorld,
+    title: 'vue高级',
+    children: [
+      { path: 'dongtai', name: 'Dongtai', title: '动态组件', component: Dongtai },
+      { path: 'yibu', name: 'Yibu', title: '异步组件', component: Yibu },
+      { path: 'keep-alive', name: 'KeepAlive', title: 'keep-alive', component: KeepAlive },
+      { path: 'mixin', name: 'Mixin', title: '混入', component: Mixin },
+    ]
+  }, {
+    path: '/vuex',
+    component: Vuex,
+    name: 'vuex',
+    title: 'vuex'
+  }
+]
+
 export default new Router({
-  routes: [
-    {
-      path: '/base',
-      component: HelloWorld,
-      name:'home',
-      children: [
-        { path: '/events', name: 'Events', component: Events },
-        { path: '/form', name: 'Form', component: Form },
-        { path: '/component-demo', name: 'ComponentDemo', component: ComponentDemo },
-        { path: '/advance-use', name: 'AdvanceUse', component: AdvanceUse },
-        { path: '/nextTick', name: 'NextTick', component: NextTick },
-        { path: '/slot', name: 'Slot', component: Slot },
-        { path: '/scoped-slot', name: 'ScopedSlot', component: ScopedSlot },
-        { path: '/dongtai', name: 'Dongtai', component: Dongtai },
-        { path: '/yibu', name: 'Yibu', component: Yibu },
-        { path: '/keep-alive', name: 'KeepAlive', component: KeepAlive },
-        { path: '/mixin', name: 'Mixin', component: Mixin },
-      ]
-    },{
-      path:'/vuex',
-      component:Vuex,
-      name:'vuex'
-    }
-  ]
+  routes
 })

@@ -1,7 +1,7 @@
 <template>
   <div>
     <input class="input" v-model="val" />
-    <van-button @click="handle">提交</van-button>
+    <button @click="handle">提交</button>
   </div>
 </template>
 
