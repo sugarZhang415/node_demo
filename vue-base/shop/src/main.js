@@ -1,23 +1,23 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router';
-import Vuex from 'vuex';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(Vuex)
+import store from './store/index.js';
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
-const store = new Vuex.Store({
-   state:{
-    count:0
-   },
-   mutations:{
-     addCount(state,val){
-       state.count = state.count + val
-     }
-   }
-})
+//全局导航守卫
+// router.beforeEach((to,from,next)=>{
+//   if(store.state.userInfo || to.path === '/login'){
+//     next()
+//   }else{
+//     next({
+//       path:'/login'
+//     })
+//   }
+// })
+
 new Vue({
   render: h => h(App),
   store,

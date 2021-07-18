@@ -18,11 +18,22 @@ import Vuex from './pages/vuex/index.vue'
 Vue.use(Router)
 
 const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
+Router.prototype.push = function push(location, onResolve, onReject) {
+    if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+    return originalPush.call(this, location).catch(err => err)
 }
 
-export const routes = [
+export const routes = [{
+  path: '/login',
+  component: ()=>import('./pages/login/index.vue'),
+  name: 'login',
+  title: '登录'
+},{
+    path: '/vuex',
+    component: Vuex,
+    name: 'vuex',
+    title: 'vuex'
+  },
   {
     path: '/base',
     component: HelloWorld,
@@ -46,11 +57,6 @@ export const routes = [
       { path: 'keep-alive', name: 'KeepAlive', title: 'keep-alive', component: KeepAlive },
       { path: 'mixin', name: 'Mixin', title: '混入', component: Mixin },
     ]
-  }, {
-    path: '/vuex',
-    component: Vuex,
-    name: 'vuex',
-    title: 'vuex'
   }
 ]
 
