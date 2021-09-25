@@ -19,5 +19,6 @@ vue3-demo
 demo
   网课系统复习vue的代码(慕课网代码)
 
-vuex-demo
-  vuex的demo(慕课网的代码)
+
+
+git
